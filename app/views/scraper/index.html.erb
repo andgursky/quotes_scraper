@@ -1,0 +1,42 @@
+<h1>Quotes Scraper</h1>
+<div ng-controller="ScraperCtrl">
+  <form ng-submit="addStock()">
+    <div class="input-div">
+      <div class="input-group">
+        <input class="form-control" type="text" ng-model="newStock.ticker"/>
+        <span class="input-group-btn">
+          <input class="btn btn-primary" type="submit" value="Add"/>
+        </span>
+      </div>
+    </div>
+  </form>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>TICKER</th>
+        <th>CHNG</th>
+        <th>OPEN</th>
+        <th>HIGHT</th>
+        <th>LOW</th>
+        <th>CLOSE</th>
+        <th>VALUE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="stock in stocks">
+        <td id="ticker">{{stock.ticker}}</td>
+        <td>{{stock.change}}%</td>
+        <td>{{stock.open}}</td>
+        <td>{{stock.height}}</td>
+        <td>{{stock.low}}</td>
+        <td>{{stock.close}}</td>
+        <td>{{stock.value}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <form>
+    <button class="btn btn-primary" ng-click="updateStockData()">Update data</button>
+    <button class="btn btn-primary" ng-click="setDataToXls()">Xls</button>
+  </form>
+</div>
+
