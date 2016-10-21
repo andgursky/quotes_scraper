@@ -31,7 +31,9 @@
         <td>{{stock.low}}</td>
         <td>{{stock.close}}</td>
         <td>{{stock.value}}</td>
-      </tr>
+        <td><button class="btn btn-danger"
+        ng-click="removeStock(stock.id)">remove</button></td>
+      <tr>
     </tbody>
   </table>
   <form>
