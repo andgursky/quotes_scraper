@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020212838) do
+ActiveRecord::Schema.define(version: 20161025120739) do
 
   create_table "stocks", force: true do |t|
     t.string   "ticker"
-    t.decimal  "change"
+    t.string   "change"
     t.decimal  "open"
     t.decimal  "height"
     t.decimal  "low"

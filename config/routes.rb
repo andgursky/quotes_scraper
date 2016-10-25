@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :stocks, only: [:index, :create, :destroy],
+  resources :stocks, only: [:index, :create,:update, :destroy],
     defaults: {format: :json}
 
   root to: 'scraper#index'

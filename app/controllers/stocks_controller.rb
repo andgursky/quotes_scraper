@@ -15,7 +15,13 @@ class StocksController < ApplicationController
   end
 
   def update
-    respond_with Stock.update(params[:id], params[:stock])
+    importer = Importer.new(Stock.all)
+    updated_data = importer.get_data
+    updated_data.each do |h|
+      id = Stock.find_by_ticker(h[:ticker]).id
+      Stock.update(id, h)
+    end
+    respond_with Stock.all and return
   end
 
   def destroy

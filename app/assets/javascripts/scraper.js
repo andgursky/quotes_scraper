@@ -9,7 +9,7 @@ app.controller("ScraperCtrl", function($scope, $resource) {
 
       for(var indx in arr) {
         temp_obj = { ticker:arr[indx],
-                     change:0.0,
+                     change:"0.0",
                      open:0.0,
                      height:0.0,
                      low:0.0,
@@ -26,14 +26,20 @@ app.controller("ScraperCtrl", function($scope, $resource) {
   $scope.removeStock = function(stock_id) {
     $scope.stocks.forEach(function(stock, index) {
       if (stock_id === stock.id) {
-        console.log(stock.id);
-        console.log(index);
-        console.log(stock.ticker);
         stock.$delete( { ticker:stock.ticker, action:"delete",
           stock_id:stock.id }, function() {
           $scope.stocks.splice(index, 1);
         });
       };
+    });
+  };
+  $scope.updateStockData = function() {
+    /*$scope.stocks.forEach(function(stock, index) {
+      stock.$update({ ticker:stock.ticker, action:"update",stock_id:stock.id });
+    });*/
+    $scope.stocks[0].$update({ action:"update" });
+    Stock.query().$promise.then(function(result) {
+      $scope.stocks = result;
     });
   };
 });
