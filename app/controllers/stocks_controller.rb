@@ -1,7 +1,8 @@
 class StocksController < ApplicationController
-  respond_to :json
+  respond_to :json, :xlsx
 
   def index
+    @stocks = Stock.all
     respond_with Stock.all
   end
 
@@ -26,6 +27,12 @@ class StocksController < ApplicationController
 
   def destroy
     respond_with Stock.destroy(params[:id])
+  end
+
+  def download
+    @stocks = Stock.all
+    render xlsx: 'download', template: 'stocks/download',
+      filename: "download.xlsx"
   end
 
   private

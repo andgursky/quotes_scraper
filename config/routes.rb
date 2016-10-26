@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'stocks/download' => 'stocks#download', :format => 'xlsx'
+
   resources :stocks, only: [:index, :create,:update, :destroy],
     defaults: {format: :json}
 

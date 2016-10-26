@@ -1,0 +1,8 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Stocks Portfolio") do |sheet|
+  sheet.add_row ["ticker", "change", "open", "low", "height", "close", "value"]
+  @stocks.each do |stock|
+    sheet.add_row [stock.ticker, stock.change, stock.open, stock.low,
+                   stock.height, stock.close, stock.value]
+  end
+end

@@ -1,5 +1,5 @@
 var app = angular.module('MyApp', ["ngResource"]);
-app.controller("ScraperCtrl", function($scope, $resource) {
+app.controller("ScraperCtrl", function($scope, $resource, $http) {
   var Stock = $resource("/stocks/:id", {id: "@id"}, {update: {method:"PUT"}});
   $scope.stocks = Stock.query();
   $scope.addStock = function() {
@@ -34,9 +34,6 @@ app.controller("ScraperCtrl", function($scope, $resource) {
     });
   };
   $scope.updateStockData = function() {
-    /*$scope.stocks.forEach(function(stock, index) {
-      stock.$update({ ticker:stock.ticker, action:"update",stock_id:stock.id });
-    });*/
     $scope.stocks[0].$update({ action:"update" });
     Stock.query().$promise.then(function(result) {
       $scope.stocks = result;

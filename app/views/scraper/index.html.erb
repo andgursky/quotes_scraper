@@ -38,7 +38,6 @@
   </table>
   <form>
     <button class="btn btn-primary" ng-click="updateStockData()">Update data</button>
-    <button class="btn btn-primary" ng-click="setDataToXls()">Xls</button>
+    <%= link_to "Xls", "stocks/download.xlsx", :class=>"btn btn-primary" %>
   </form>
 </div>
-
