@@ -1,5 +1,6 @@
 class Importer
 require 'capybara/dsl'
+require 'headless'
 require 'selenium-webdriver'
 
 Capybara.configure do |config|
@@ -16,10 +17,13 @@ include Capybara::DSL
     @stocks_json = stocks_arr.as_json
     @url = create_url
     @blobs = Array.new
+    @headless = Headless.new
+    @headless.start
   end
 
   def get_data
     #visit yahoo and store stocks data
+    #in headless mode
     visit @url
 
     fetch_html_data.each do |block|

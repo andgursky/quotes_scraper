@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 
+gem 'rails_12factor'
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Style
 gem 'bootstrap-sass'
 gem 'bootstrap'
+
+gem 'headless'
 
 group :development do
   # Use sqlite3 as the database for Active Record

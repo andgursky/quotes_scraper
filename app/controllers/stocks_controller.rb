@@ -7,7 +7,6 @@ class StocksController < ApplicationController
   end
 
   def show
-    binding.pry
     respond_with Stock.find(params[:id])
   end
 

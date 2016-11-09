@@ -8,7 +8,7 @@ app.controller("ScraperCtrl", function($scope, $resource, $http) {
       var arr = $scope.newStock.ticker.split(',');
 
       for(var indx in arr) {
-        temp_obj = { ticker:arr[indx],
+        temp_obj = { ticker:arr[indx].replace(/\s+/,''),
                      change:"0.0",
                      open:0.0,
                      height:0.0,
@@ -35,7 +35,29 @@ app.controller("ScraperCtrl", function($scope, $resource, $http) {
   };
   $scope.updateStockData = function() {
     $scope.stocks[0].$update({ action:"update" });
+
+    /*create a div for throbber*/
+    var div = document.createElement("div");
+    div.style.cssText = "position:absolute; left:45%; top:35%; width:100px;"+
+      "height:100px; margin:0 auto; background-color:rgba(255,255,255,0.5);"+
+      "z-index:100;";
+    div.id = "t1";
+    document.body.appendChild(div);
+
+    /*create a throbber*/
+    var throb = Throbber( { color: 'grey',
+                            fade: 1000,
+                            size: 100,
+                            strokewidth: 5 });
+    throb.appendTo( document.getElementById( 't1' ));
+    throb.start();
+
     Stock.query().$promise.then(function(result) {
+      /*stop throbbing*/
+      throb.stop();
+      /*removing div element*/
+      var elem = document.getElementById("t1");
+      elem.parentElement.removeChild(elem);
       $scope.stocks = result;
     });
   };
