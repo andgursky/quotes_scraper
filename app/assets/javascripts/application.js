@@ -16,4 +16,5 @@
 //= require angular
 //= require angular-resource
 //= require turbolinks
+//= require_tree ../../../lib/assets/javascripts/throbber
 //= require_tree .
