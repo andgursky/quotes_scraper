@@ -26,10 +26,10 @@
       <tr ng-repeat="stock in stocks">
         <td id="ticker">{{stock.ticker}}</td>
         <td>{{stock.change}}%</td>
-        <td>{{stock.open}}</td>
-        <td>{{stock.height}}</td>
-        <td>{{stock.low}}</td>
-        <td>{{stock.close}}</td>
+        <td>{{stock.open | number: 2}}</td>
+        <td>{{stock.height | number: 2}}</td>
+        <td>{{stock.low | number: 2}}</td>
+        <td>{{stock.close | number: 2}}</td>
         <td>{{stock.value}}</td>
         <td><button class="btn btn-danger"
         ng-click="removeStock(stock.id)">remove</button></td>

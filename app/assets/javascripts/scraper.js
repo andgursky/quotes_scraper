@@ -14,7 +14,7 @@ app.controller("ScraperCtrl", function($scope, $resource, $http) {
                      height:0.0,
                      low:0.0,
                      close:0.0,
-                     value:0.0 };
+                     value:0 };
         if (!isStockExist(arr[indx].replace(/\s+/,''), $scope.stocks)) {
           stock = Stock.save(temp_obj);
           $scope.stocks.push(stock);

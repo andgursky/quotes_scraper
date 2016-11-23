@@ -3,8 +3,14 @@ require 'capybara/dsl'
 require 'headless'
 require 'selenium-webdriver'
 
+Capybara.register_driver :slow_selenium do |app|
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.timeout = 240
+  Capybara::Selenium::Driver.new(app, http_client: client)
+end
+
 Capybara.configure do |config|
-  config.default_driver = :selenium
+  config.default_driver = :slow_selenium
 end
 
 include Capybara::DSL
@@ -64,13 +70,14 @@ include Capybara::DSL
       (?<close>[\d.,]+)\s+Day\'s\s+Range\s+
       (?<low>([\d.,]+|N\/A))\s*-\s*
       (?<height>([\d.,]+|N\/A)).+Change:\s+
-      (?<change_in_doll>[\d.,+-]+)\s+\(
+      (?<change_in_doll>([\d.,+-]+|N\/A))\s+\(
       (?<change_in_perc>[\d.,+-]+)%\)\s+Volume:\s+
       (?<volume>[\d,.]+)\s+.+Open:\s+
       (?<open>[\d.,]+)\s+/ix
     m = block.match(regexp)
-    { ticker:m["ticker"], change:m["change_in_perc"], open:m["open"],
-      height:m["height"], low:m["low"], close:m["close"],
+    { ticker:m["ticker"], change:m["change_in_perc"],
+      open:m["open"].to_d.round(2), height:m["height"].to_d.round(2),
+      low:m["low"].to_d.round(2), close:m["close"].to_d.round(2),
       value:m["volume"].gsub(/\,/, '') }
   end
 
